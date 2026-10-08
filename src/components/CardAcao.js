@@ -5,9 +5,9 @@ export default function CardAcao({ titulo, subtitulo, icone, cor, corFundo, onPr
   return (
     <Pressable
       onPress={onPress}
-      style={[styles.card, { borderColor: cor, backgroundColor: corFundo ?? '#fff' }]}
+      style={[styles.card, { borderColor: cor, backgroundColor: corFundo}]}
     >
-      <View style={[styles.iconeBox, { backgroundColor: cor + '22' }]}>
+      <View style={[styles.iconeBox, { backgroundColor: corFundo}]}>
         <Ionicons name={icone} size={24} color={cor} />
       </View>
 
@@ -16,7 +16,7 @@ export default function CardAcao({ titulo, subtitulo, icone, cor, corFundo, onPr
         <Text style={styles.subtitulo}>{subtitulo}</Text>
       </View>
 
-      <Ionicons name="chevron-forward" size={20} color="#333" />
+      <Ionicons name="chevron-forward" size={25} color="#333" />
     </Pressable>
   );
 }
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: 'row', // ícone | textos | seta lado a lado
     alignItems: 'center', // centraliza na vertical
-    borderWidth: 1.5,
+    borderWidth: 3,
     borderRadius: 16,
     padding: 16,
     gap: 14,
@@ -39,5 +39,5 @@ const styles = StyleSheet.create({
   },
   textos: { flex: 1 }, // ocupa todo o espaço que sobra, empurrando a seta para a direita
   titulo: { fontSize: 18, fontWeight: '700', color: '#1F2D3D' },
-  subtitulo: { fontSize: 13, color: '#444', marginTop: 2 },
+  subtitulo: { fontSize: 15, color: '#444', marginTop: 2, fontWeight: 'bold'},
 });

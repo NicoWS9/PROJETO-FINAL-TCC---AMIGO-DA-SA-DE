@@ -2,7 +2,7 @@ import { Text, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CardAcao from '../components/CardAcao';
 
-export default function Inicio() {
+export default function Inicio({navigation}) {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScrollView contentContainerStyle={styles.conteudo}>
@@ -14,13 +14,15 @@ export default function Inicio() {
           subtitulo="4 remédios para hoje"
           icone="medkit-outline"
           cor="#2B7BD6"
-          onPress={() => {}}
+          corFundo="#3976B826"
+          onPress={() => navigation.navigate('Medicamentos')}
         />
         <CardAcao
           titulo="Exercícios Diários"
           subtitulo="3 atividades fáceis (15 min)"
           icone="fitness-outline"
           cor="#2FA37A"
+          corFundo="#63B89C26"
           onPress={() => {}}
         />
         <CardAcao
@@ -28,6 +30,7 @@ export default function Inicio() {
           subtitulo="Ligue para a família"
           icone="call-outline"
           cor="#7B63C9"
+          corFundo="#8B7BB826"
           onPress={() => {}}
         />
         <CardAcao
