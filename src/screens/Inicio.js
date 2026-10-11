@@ -23,7 +23,7 @@ export default function Inicio({navigation}) {
           icone="fitness-outline"
           cor="#2FA37A"
           corFundo="#63B89C26"
-          onPress={() => {}}
+          onPress={() => navigation.navigate('Exercicios')}
         />
         <CardAcao
           titulo="Contatos de Apoio"
@@ -31,7 +31,7 @@ export default function Inicio({navigation}) {
           icone="call-outline"
           cor="#7B63C9"
           corFundo="#8B7BB826"
-          onPress={() => {}}
+          onPress={() => navigation.navigate('Contatos')}
         />
         <CardAcao
           titulo="EMERGÊNCIA"
@@ -39,7 +39,7 @@ export default function Inicio({navigation}) {
           icone="call"
           cor="#F28C28"
           corFundo="#FDE9D0"
-          onPress={() => {}}
+          onPress={() => navigation.navigate('Emergência')}
         />
       </ScrollView>
     </SafeAreaView>

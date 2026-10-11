@@ -9,6 +9,9 @@ import Inicio from './src/screens/Inicio';
 import Agenda from './src/screens/agenda';
 import Perfil from './src/screens/perfil';
 import Medicamentos from './src/screens/medicamentos';
+import Exercicios from './src/screens/exercicios';
+import Emergencia from './src/screens/emergencia';
+import Contatos from './src/screens/contatos';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -51,6 +54,9 @@ export default function App() {
           {/* Tela principal que carrega o menu de abas */}
           <Stack.Screen name="Home" component={AbasPrincipais} options={{ headerShown: false }} />
           <Stack.Screen name="Medicamentos" component={Medicamentos} options={{ title: 'Meus Remédios' }} />
+          <Stack.Screen name="Exercicios" component={Exercicios} options={{ title: 'Exercícios Diários' }} />
+          <Stack.Screen name="Contatos" component={Contatos} options={{ title: 'Meus Contatos' }} />
+          <Stack.Screen name="Emergência" component={Emergencia} options={{ title: 'Telefone de Emergência' }} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
