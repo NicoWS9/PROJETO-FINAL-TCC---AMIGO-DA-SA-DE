@@ -39,7 +39,7 @@ export default function Inicio({navigation}) {
           icone="call"
           cor="#F28C28"
           corFundo="#FDE9D0"
-          onPress={() => navigation.navigate('Emergência')}
+          onPress={() => navigation.navigate('Emergencia')}
         />
       </ScrollView>
     </SafeAreaView>
