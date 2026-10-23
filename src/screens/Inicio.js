@@ -1,17 +1,11 @@
 import { useState } from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  Pressable,
-  Platform,
-} from 'react-native';
+import { View, Text, ScrollView, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useAlturaBarra } from '../constants/barra';
 
-const SERIF = Platform.select({ ios: 'Georgia', android: 'serif', default: 'serif' });
+import { useAlturaBarra } from '../components/BarraInferior';
+import { cores } from '../styles/tema';
+import { estilosInicio } from '../styles/inicioStyles';
 
 const DIAS = ['DOMINGO', 'SEGUNDA', 'TERÇA', 'QUARTA', 'QUINTA', 'SEXTA', 'SÁBADO'];
 const MESES = [
@@ -36,16 +30,16 @@ function LinhaCard({ icone, cor, corFundo, titulo, subtitulo, onPress }) {
   return (
     <Pressable
       onPress={onPress}
-      style={({ pressed }) => [styles.linhaCard, pressed && styles.pressionado]}
+      style={({ pressed }) => [estilosInicio.linhaCard, pressed && estilosInicio.pressionado]}
     >
-      <View style={[styles.linhaIcone, { backgroundColor: corFundo }]}>
+      <View style={[estilosInicio.linhaIcone, { backgroundColor: corFundo }]}>
         <Ionicons name={icone} size={26} color={cor} />
       </View>
-      <View style={styles.linhaTextos}>
-        <Text style={styles.linhaTitulo}>{titulo}</Text>
-        <Text style={styles.linhaSubtitulo}>{subtitulo}</Text>
+      <View style={estilosInicio.linhaTextos}>
+        <Text style={estilosInicio.linhaTitulo}>{titulo}</Text>
+        <Text style={estilosInicio.linhaSubtitulo}>{subtitulo}</Text>
       </View>
-      <Ionicons name="chevron-forward" size={20} color="#1B2A4E" />
+      <Ionicons name="chevron-forward" size={20} color={cores.azulTinta} />
     </Pressable>
   );
 }
@@ -54,20 +48,20 @@ function CardMeio({ icone, cor, corFundo, titulo, subtitulo, onPress }) {
   return (
     <Pressable
       onPress={onPress}
-      style={({ pressed }) => [styles.cardMeio, pressed && styles.pressionado]}
+      style={({ pressed }) => [estilosInicio.cardMeio, pressed && estilosInicio.pressionado]}
     >
-      <View style={[styles.cardMeioIcone, { backgroundColor: corFundo }]}>
+      <View style={[estilosInicio.cardMeioIcone, { backgroundColor: corFundo }]}>
         <Ionicons name={icone} size={22} color={cor} />
       </View>
-      <Text style={styles.cardMeioTitulo}>{titulo}</Text>
-      <Text style={styles.cardMeioSubtitulo}>{subtitulo}</Text>
+      <Text style={estilosInicio.cardMeioTitulo}>{titulo}</Text>
+      <Text style={estilosInicio.cardMeioSubtitulo}>{subtitulo}</Text>
     </Pressable>
   );
 }
 
 export default function Inicio({ navigation }) {
-  const agora = new Date();
   const alturaBarra = useAlturaBarra();
+  const agora = new Date();
   const data = `${DIAS[agora.getDay()]} · ${agora.getDate()} DE ${MESES[agora.getMonth()]}`;
 
   // índice da próxima dose a ser tomada (1 = "2 de 4")
@@ -81,50 +75,50 @@ export default function Inicio({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={estilosInicio.container} edges={['top']}>
       <ScrollView
-        contentContainerStyle={[styles.conteudo, { paddingBottom: alturaBarra + 100 }]}
+        contentContainerStyle={[estilosInicio.conteudo, { paddingBottom: alturaBarra + 100 }]}
         showsVerticalScrollIndicator={false}
       >
         {/* Cabeçalho */}
-        <View style={styles.cabecalho}>
+        <View style={estilosInicio.cabecalho}>
           <View style={{ flex: 1 }}>
-            <Text style={styles.data}>{data}</Text>
-            <Text style={styles.saudacao}>{saudacaoDoDia(agora.getHours())}, Maria</Text>
+            <Text style={estilosInicio.data}>{data}</Text>
+            <Text style={estilosInicio.saudacao}>{saudacaoDoDia(agora.getHours())}, Maria</Text>
           </View>
           <Pressable
-            style={styles.botaoAjustes}
+            style={estilosInicio.botaoAjustes}
             onPress={() => navigation.navigate('Perfil')}
           >
-            <Ionicons name="options-outline" size={22} color="#1B2A4E" />
+            <Ionicons name="options-outline" size={22} color={cores.azulTinta} />
           </Pressable>
         </View>
 
         {/* Próxima dose */}
-        <View style={styles.heroCard}>
-          <View style={[styles.circulo, { width: 220, height: 220, right: -70, top: -90 }]} />
-          <View style={[styles.circulo, { width: 150, height: 150, right: -35, top: -55 }]} />
+        <View style={estilosInicio.heroCard}>
+          <View style={[estilosInicio.circulo, { width: 220, height: 220, right: -70, top: -90 }]} />
+          <View style={[estilosInicio.circulo, { width: 150, height: 150, right: -35, top: -55 }]} />
 
-          <View style={styles.heroTopo}>
-            <View style={styles.heroRotulo}>
-              <View style={styles.ponto} />
-              <Text style={styles.heroRotuloTexto}>
+          <View style={estilosInicio.heroTopo}>
+            <View style={estilosInicio.heroRotulo}>
+              <View style={estilosInicio.ponto} />
+              <Text style={estilosInicio.heroRotuloTexto}>
                 {concluido ? 'TUDO CERTO' : 'PRÓXIMA DOSE'}
               </Text>
             </View>
-            <Text style={styles.heroContagem}>
+            <Text style={estilosInicio.heroContagem}>
               {Math.min(indice + 1, total)} de {total} hoje
             </Text>
           </View>
 
-          <Text style={styles.heroNome}>
+          <Text style={estilosInicio.heroNome}>
             {concluido ? 'Doses de hoje concluídas' : dose.nome}
           </Text>
 
           {!concluido && (
-            <View style={styles.heroDetalhe}>
-              <Ionicons name="time-outline" size={16} color="#D9DEEA" />
-              <Text style={styles.heroDetalheTexto}>
+            <View style={estilosInicio.heroDetalhe}>
+              <Ionicons name="time-outline" size={16} color={cores.textoClaro} />
+              <Text style={estilosInicio.heroDetalheTexto}>
                 {dose.horario} · {dose.qtd}
               </Text>
             </View>
@@ -134,20 +128,20 @@ export default function Inicio({ navigation }) {
             onPress={marcarTomado}
             disabled={concluido}
             style={({ pressed }) => [
-              styles.botaoTomado,
+              estilosInicio.botaoTomado,
               concluido && { opacity: 0.5 },
               pressed && { opacity: 0.85 },
             ]}
           >
-            <Ionicons name="checkmark" size={22} color="#1B2A4E" />
-            <Text style={styles.botaoTomadoTexto}>Marcar como tomado</Text>
+            <Ionicons name="checkmark" size={22} color={cores.azulTinta} />
+            <Text style={estilosInicio.botaoTomadoTexto}>Marcar como tomado</Text>
           </Pressable>
 
-          <View style={styles.progresso}>
+          <View style={estilosInicio.progresso}>
             {DOSES.map((_, i) => (
               <View
                 key={i}
-                style={[styles.segmento, i <= indice && styles.segmentoAtivo]}
+                style={[estilosInicio.segmento, i <= indice && estilosInicio.segmentoAtivo]}
               />
             ))}
           </View>
@@ -174,7 +168,7 @@ export default function Inicio({ navigation }) {
         />
 
         {/* Exercícios / Apoio */}
-        <View style={styles.linhaDupla}>
+        <View style={estilosInicio.linhaDupla}>
           <CardMeio
             icone="pulse-outline"
             cor="#B7791F"
@@ -194,174 +188,24 @@ export default function Inicio({ navigation }) {
         </View>
       </ScrollView>
 
-      {/* Emergência fixa (logo acima da barra do App.js) */}
+      {/* Emergência fixa, logo acima da barra flutuante */}
       <Pressable
         onPress={() => navigation.navigate('Emergencia')}
         style={({ pressed }) => [
-          styles.emergencia,
+          estilosInicio.emergencia,
           { bottom: alturaBarra + 10 },
           pressed && { opacity: 0.9 },
         ]}
       >
-        <View style={styles.emergenciaIcone}>
-          <Ionicons name="call-outline" size={22} color="#fff" />
+        <View style={estilosInicio.emergenciaIcone}>
+          <Ionicons name="call-outline" size={22} color={cores.branco} />
         </View>
         <View style={{ flex: 1 }}>
-          <Text style={styles.emergenciaTitulo}>Emergência</Text>
-          <Text style={styles.emergenciaSubtitulo}>Avisa SAMU e família</Text>
+          <Text style={estilosInicio.emergenciaTitulo}>Emergência</Text>
+          <Text style={estilosInicio.emergenciaSubtitulo}>Avisa SAMU e família</Text>
         </View>
-        <Ionicons name="chevron-forward" size={20} color="#fff" />
+        <Ionicons name="chevron-forward" size={20} color={cores.branco} />
       </Pressable>
     </SafeAreaView>
   );
 }
-
-const NAVY = '#1B2A5E';
-const OURO = '#EBCB8B';
-
-const sombra = Platform.select({
-  ios: {
-    shadowColor: '#1B2A4E',
-    shadowOpacity: 0.1,
-    shadowRadius: 14,
-    shadowOffset: { width: 0, height: 6 },
-  },
-  android: { elevation: 4 },
-});
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFF' },
-  conteudo: { paddingHorizontal: 16, paddingTop: 12, paddingBottom: 100, gap: 14 },
-  pressionado: { opacity: 0.85, transform: [{ scale: 0.99 }] },
-
-  cabecalho: { flexDirection: 'row', alignItems: 'flex-start', marginBottom: 4 },
-  data: {
-    fontSize: 12,
-    fontWeight: '700',
-    letterSpacing: 1.2,
-    color: '#A66A12',
-    marginBottom: 2,
-  },
-  saudacao: { fontFamily: SERIF, fontSize: 32, fontWeight: '800', color: '#14213D' },
-  botaoAjustes: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    ...sombra,
-  },
-
-  heroCard: {
-    backgroundColor: NAVY,
-    borderRadius: 24,
-    padding: 18,
-    overflow: 'hidden',
-    ...sombra,
-  },
-  circulo: {
-    position: 'absolute',
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.08)',
-  },
-  heroTopo: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  heroRotulo: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  ponto: { width: 8, height: 8, borderRadius: 4, backgroundColor: OURO },
-  heroRotuloTexto: { color: OURO, fontSize: 12, fontWeight: '800', letterSpacing: 1.2 },
-  heroContagem: { color: '#D9DEEA', fontSize: 13 },
-  heroNome: {
-    fontFamily: SERIF,
-    fontSize: 28,
-    fontWeight: '800',
-    color: '#fff',
-    marginTop: 14,
-  },
-  heroDetalhe: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 6 },
-  heroDetalheTexto: { color: '#D9DEEA', fontSize: 15 },
-  botaoTomado: {
-    marginTop: 16,
-    backgroundColor: OURO,
-    borderRadius: 18,
-    height: 56,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-  },
-  botaoTomadoTexto: { fontSize: 18, fontWeight: '800', color: '#1B2A4E' },
-  progresso: { flexDirection: 'row', gap: 8, marginTop: 14 },
-  segmento: {
-    flex: 1,
-    height: 5,
-    borderRadius: 3,
-    backgroundColor: 'rgba(255,255,255,0.22)',
-  },
-  segmentoAtivo: { backgroundColor: OURO },
-
-  linhaCard: {
-    backgroundColor: '#fff',
-    borderRadius: 22,
-    padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 14,
-    ...sombra,
-  },
-  linhaIcone: {
-    width: 52,
-    height: 52,
-    borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  linhaTextos: { flex: 1 },
-  linhaTitulo: { fontSize: 17, fontWeight: '800', color: '#14213D' },
-  linhaSubtitulo: { fontSize: 14, color: '#5B6475', marginTop: 2 },
-
-  linhaDupla: { flexDirection: 'row', gap: 14 },
-  cardMeio: {
-    flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: 22,
-    padding: 16,
-    minHeight: 130,
-    ...sombra,
-  },
-  cardMeioIcone: {
-    width: 46,
-    height: 46,
-    borderRadius: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 12,
-  },
-  cardMeioTitulo: { fontSize: 17, fontWeight: '800', color: '#14213D' },
-  cardMeioSubtitulo: { fontSize: 13, color: '#5B6475', marginTop: 2 },
-
-  emergencia: {
-    position: 'absolute',
-    left: 12,
-    right: 12,
-    bottom: 8,
-    backgroundColor: '#B23A2A',
-    borderRadius: 20,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    ...sombra,
-  },
-  emergenciaIcone: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  emergenciaTitulo: { color: '#fff', fontSize: 17, fontWeight: '800' },
-  emergenciaSubtitulo: { color: '#FBE3DF', fontSize: 13 },
-});
